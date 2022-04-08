@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+// Класс который заполняет базу данных начальной информацией
+
 @Configuration
 public class StudentConfig {
     @Bean

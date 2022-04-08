@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+// Класс, взаимодействующий с базой данных
 
+@Repository
 public interface StudentRepository
         extends JpaRepository<Student,Long> {
 

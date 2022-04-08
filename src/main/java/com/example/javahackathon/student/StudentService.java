@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+// Принимает информацию из запроса и передает необходимую информацию базе данных(не напрямую),
+// реализует "бизнес логику"
+
 @Service
 public class StudentService {
 
