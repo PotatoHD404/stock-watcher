@@ -14,35 +14,37 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - postgres
+      - app
     restart: unless-stopped
   api:
-    image: 'docker-spring-boot-postgres:latest'
+    image: spring-boot
     build:
       context: ./backend
-    container_name: api
+    ports:
+      - "4000:8080"
     depends_on:
       - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    ports:
-      - "3001:3001"
-  frontend:
+    volumes:
+      - ./backend/src:/usr/src/mymaven/src
+    networks:
+      - app
+  app:
     build: ./frontend #This specifies the location of our Dockerfile
-    context: ./frontend #This specifies the location of our Dockerfile
-    command: prod
+    command: dev
     ports: #This is used to map the container’s ports to the host machine.
       - "3000:3000"
+    depends_on:
+      - db
+      - api
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/.next
+    networks:
+      - app
 
 networks:
-  postgres:
+  app:
     driver: bridge
 
 volumes:
