@@ -16,26 +16,13 @@ services:
     networks:
       - app
     restart: unless-stopped
-  api:
-    image: spring-boot
-    build:
-      context: ./backend
-    ports:
-      - "4000:8080"
-    depends_on:
-      - db
-    volumes:
-      - ./backend/src:/usr/src/mymaven/src
-    networks:
-      - app
   app:
-    build: ./frontend #This specifies the location of our Dockerfile
+    build: . #This specifies the location of our Dockerfile
     command: dev
     ports: #This is used to map the container’s ports to the host machine.
       - "3000:3000"
     depends_on:
       - db
-      - api
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -49,4 +36,3 @@ networks:
 
 volumes:
   postgres:
-  pgadmin:
