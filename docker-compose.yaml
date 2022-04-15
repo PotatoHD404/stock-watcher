@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: PotatoHD
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: java
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app
+    restart: unless-stopped
+  api:
+    image: spring-boot
+    build:
+      context: ./backend
+    ports:
+      - "4000:8080"
+    depends_on:
+      - db
+    volumes:
+      - ./backend/src:/usr/src/mymaven/src
+    networks:
+      - app
+  app:
+    build: ./frontend #This specifies the location of our Dockerfile
+    command: dev
+    ports: #This is used to map the container’s ports to the host machine.
+      - "3000:3000"
+    depends_on:
+      - db
+      - api
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
