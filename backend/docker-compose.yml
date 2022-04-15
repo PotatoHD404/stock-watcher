@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: PotatoHD
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: java
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app
+    restart: unless-stopped
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  postgres:

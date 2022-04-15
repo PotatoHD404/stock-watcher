@@ -26,6 +26,8 @@ services:
       - db
     volumes:
       - ./backend/src:/usr/src/mymaven/src
+      - ./backend/src:/usr/src/mymaven/src
+      - ./backend/src:/usr/src/mymaven/src
     networks:
       - app
   app:
