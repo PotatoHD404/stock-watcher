@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: PotatoHD
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: java
+      POSTGRES_DB: stocks
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
