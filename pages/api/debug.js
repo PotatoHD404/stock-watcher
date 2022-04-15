@@ -6,6 +6,6 @@ import {CreateUser} from "../../database/models/User";
 export default async function handler(req, res) {
     let a = '21313';
 
-    res.status(200).json({ok: 'ok', res: 1213, sqs: []});
+    res.status(200).json({ok: 'ok'});
 }
 

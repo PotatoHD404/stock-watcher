@@ -8,6 +8,9 @@ class User extends Model {
     comparePassword(password) {
         return bcrypt.compareSync(password, this["hash_password"]);
     }
+    hashPassword(password) {
+        return bcrypt.hash(password);
+    }
 }
 
 User.init(
